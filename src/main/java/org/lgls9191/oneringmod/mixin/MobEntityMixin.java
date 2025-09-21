@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MobEntity.class)
-public abstract class MobTargetsPlayerMixin {
+public abstract class MobEntityMixin {
     @Shadow
     private LivingEntity target;
 

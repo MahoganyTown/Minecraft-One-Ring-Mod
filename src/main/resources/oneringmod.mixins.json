@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "MobTargetsPlayerMixin",
-    "PlayerEntityDropsItemMixin"
+    "MobEntityMixin"
   ],
   "client": [
   ],
