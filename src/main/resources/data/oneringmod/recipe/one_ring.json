@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#N#",
+    "###"
+  ],
+  "key": {
+    "#": "minecraft:gold_block",
+    "N": "minecraft:nether_star"
+  },
+  "result": {
+    "count": 1,
+    "id": "oneringmod:one_ring"
+  }
+}
