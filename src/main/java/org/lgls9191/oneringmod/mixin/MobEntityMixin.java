@@ -25,17 +25,10 @@ public abstract class MobEntityMixin {
             // Is the target is the player, then verify inventory
             if (target.isPlayer()) {
                 PlayerEntity player = (PlayerEntity) target;
-                ItemStack ring = new ItemStack(ModItems.ONE_RING);
-                ItemStack playerItem = PlayerUtils.findItemInHotbar(player, ring);
 
-                if (playerItem != null) {
-                    // The player has a ring in the hotbar
-                    OneRingItem ringItem = (OneRingItem) playerItem.getItem();
-
-                    if (ringItem.isActive()) {
-                        // Is active, so mobs should not see the player
-                        this.target = null;
-                    }
+                if (PlayerUtils.isRingInHotbarActive(player.getInventory())) {
+                    // Is active, so mobs should not see the player
+                    this.target = null;
                 }
             }
         }

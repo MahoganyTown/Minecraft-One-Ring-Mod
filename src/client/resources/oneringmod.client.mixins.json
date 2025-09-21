@@ -4,6 +4,7 @@
   "package": "org.lgls9191.oneringmod.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

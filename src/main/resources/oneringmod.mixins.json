@@ -8,6 +8,7 @@
     "MobEntityMixin"
   ],
   "client": [
+
   ],
   "injectors": {
     "defaultRequire": 1
