@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class OneRingItem extends Item {
     // Is the ring on or not
-    private boolean isActive = false;
+    private boolean active = false;
 
     public OneRingItem(Settings settings) {
         super(settings);
@@ -18,16 +18,26 @@ public class OneRingItem extends Item {
     // write this if the version is 1.21.2 or higher:
     @Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
-        // Toggle activate or deactivate
-        toggleActive();
+        if (world.isClient()) {
+            // Toggle activate or deactivate
+            toggleActive();
 
-        // Play entry sound
-        user.playSound(SoundEvents.EVENT_MOB_EFFECT_BAD_OMEN, 1.0F, 1.0F);
+            // Play entry sound
+            user.playSound(SoundEvents.EVENT_MOB_EFFECT_BAD_OMEN, 1.0F, 1.0F);
+        }
 
         return ActionResult.SUCCESS;
     }
 
     public void toggleActive() {
-        isActive = !isActive;
+        active = !active;
+    }
+
+    public void deactivate() {
+        active = false;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }

@@ -5,6 +5,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.lgls9191.oneringmod.items.ModItems;
+import org.lgls9191.oneringmod.items.OneRingItem;
 import org.lgls9191.oneringmod.payload.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,10 +26,16 @@ public abstract class MobTargetsPlayerMixin {
             if (target.isPlayer()) {
                 PlayerEntity player = (PlayerEntity) target;
                 ItemStack ring = new ItemStack(ModItems.ONE_RING);
+                ItemStack playerItem = PlayerUtils.findItemInHotbar(player, ring);
 
-                if (PlayerUtils.hasItemInHotbar(player, ring)) {
-                    // Make the mob not target the player if ring active
-                    this.target = null;
+                if (playerItem != null) {
+                    // The player has a ring in the hotbar
+                    OneRingItem ringItem = (OneRingItem) playerItem.getItem();
+
+                    if (ringItem.isActive()) {
+                        // Is active, so mobs should not see the player
+                        this.target = null;
+                    }
                 }
             }
         }

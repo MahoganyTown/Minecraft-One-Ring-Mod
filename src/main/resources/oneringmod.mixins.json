@@ -4,7 +4,9 @@
   "package": "org.lgls9191.oneringmod.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MobTargetsPlayerMixin"
+    "LivingEntityMixin",
+    "MobTargetsPlayerMixin",
+    "PlayerEntityDropsItemMixin"
   ],
   "client": [
   ],
