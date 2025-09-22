@@ -1,0 +1,17 @@
+{
+  "windy_fire": {
+    "subtitle": "sound.oneringmod.windy_fire",
+    "sounds": [
+      {
+        "name": "oneringmod:windy_fire",
+        "stream": true
+      }
+    ]
+  },
+  "engine": {
+    "subtitle": "sound.oneringmod.engine",
+    "sounds": [
+      "oneringmod:engine"
+    ]
+  }
+}
