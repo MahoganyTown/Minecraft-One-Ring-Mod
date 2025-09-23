@@ -37,8 +37,10 @@ public class OneRingItem extends Item {
             // Send packet to server
             UseRingS2CPayload payload = new UseRingS2CPayload(user.getUuidAsString(), active);
 
-            for (ServerPlayerEntity player : PlayerLookup.world((ServerWorld) world)) {
-                ServerPlayNetworking.send(player, payload);
+            if (world.getServer() != null) {
+                for (ServerPlayerEntity player : PlayerLookup.all(world.getServer())) {
+                    ServerPlayNetworking.send(player, payload);
+                }
             }
         }
 

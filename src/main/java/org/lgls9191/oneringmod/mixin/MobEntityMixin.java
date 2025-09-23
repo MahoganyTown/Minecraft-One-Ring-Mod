@@ -4,7 +4,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.lgls9191.oneringmod.networking.PlayerStateTrackerServer;
-import org.lgls9191.oneringmod.payload.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,12 +29,6 @@ public abstract class MobEntityMixin {
                         this.target = null;
                     }
                 }
-//                player.getUuidAsString()
-
-//                if (PlayerUtils.isRingInHotbarActive(player.getInventory())) {
-//                    // Is active, so mobs should not see the player
-//                    this.target = null;
-//                }
             }
         }
     }

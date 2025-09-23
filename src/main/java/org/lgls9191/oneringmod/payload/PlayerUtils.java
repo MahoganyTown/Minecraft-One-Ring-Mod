@@ -1,6 +1,5 @@
 package org.lgls9191.oneringmod.payload;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import org.lgls9191.oneringmod.items.ModItems;
@@ -30,5 +29,18 @@ public class PlayerUtils {
         }
 
         return false;
+    }
+
+    public static void deacAllPlayerRings(PlayerInventory inventory) {
+        ItemStack ring = new ItemStack(ModItems.ONE_RING);
+        // Loop through all the slots
+        for (int i = 0; i < inventory.size(); i++) {
+            ItemStack stack = inventory.getStack(i);
+            // Check if the item in the hotbar matches the item to check
+            if (ItemStack.areItemsEqual(stack, ring)) {
+                OneRingItem ringItem = (OneRingItem) stack.getItem();
+                ringItem.deactivate();
+            }
+        }
     }
 }
