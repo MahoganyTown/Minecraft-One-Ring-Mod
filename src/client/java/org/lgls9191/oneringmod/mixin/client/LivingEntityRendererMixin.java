@@ -12,6 +12,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import org.lgls9191.oneringmod.client.PlayerStateTracker;
 import org.lgls9191.oneringmod.payload.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,11 +31,18 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extend
 
         if (lentity instanceof PlayerEntityRenderer) {
             MinecraftClient client = MinecraftClient.getInstance();
-            ClientPlayerEntity cpe = client.player;
 
-            if (cpe != null) {
-                if (PlayerUtils.isRingInHotbarActive(cpe.getInventory())) {
-                    ci.cancel();
+            if (client.world != null) {
+                var players = client.world.getPlayers();
+
+                for (var player : players) {
+                    if (PlayerStateTracker.playersState.containsKey(player.getUuidAsString())) {
+                        if (PlayerStateTracker.playersState.get(player.getUuidAsString())) {
+                            if (!player.getUuidAsString().equals(client.player.getUuidAsString())) {
+                                ci.cancel();
+                            }
+                        }
+                    }
                 }
             }
         }
