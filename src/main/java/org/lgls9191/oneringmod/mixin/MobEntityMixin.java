@@ -3,6 +3,7 @@ package org.lgls9191.oneringmod.mixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import org.lgls9191.oneringmod.networking.PlayerStateTrackerServer;
 import org.lgls9191.oneringmod.payload.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,10 +24,18 @@ public abstract class MobEntityMixin {
             if (target.isPlayer()) {
                 PlayerEntity player = (PlayerEntity) target;
 
-                if (PlayerUtils.isRingInHotbarActive(player.getInventory())) {
-                    // Is active, so mobs should not see the player
-                    this.target = null;
+                if (PlayerStateTrackerServer.playersState.containsKey(player.getUuidAsString())) {
+                    if (PlayerStateTrackerServer.playersState.get(player.getUuidAsString())) {
+                        // Is active, so mobs should not see the player
+                        this.target = null;
+                    }
                 }
+//                player.getUuidAsString()
+
+//                if (PlayerUtils.isRingInHotbarActive(player.getInventory())) {
+//                    // Is active, so mobs should not see the player
+//                    this.target = null;
+//                }
             }
         }
     }

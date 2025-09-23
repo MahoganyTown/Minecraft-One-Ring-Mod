@@ -10,6 +10,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import org.lgls9191.oneringmod.networking.PlayerStateTrackerServer;
 import org.lgls9191.oneringmod.networking.UseRingS2CPayload;
 
 public class OneRingItem extends Item {
@@ -29,6 +30,9 @@ public class OneRingItem extends Item {
         } else {
             // Toggle activate or deactivate
             toggleActive();
+
+            // Update server-side player tracker
+            PlayerStateTrackerServer.updatePlayerState(user.getUuidAsString(), active);
 
             // Send packet to server
             UseRingS2CPayload payload = new UseRingS2CPayload(user.getUuidAsString(), active);

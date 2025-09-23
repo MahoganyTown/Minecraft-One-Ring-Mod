@@ -31,12 +31,6 @@ public class PlayerStateTracker {
                 }
 
                 PlayerStateTracker.updatePlayerState(payload.playerUUID(), payload.active());
-
-                for (HashMap.Entry<String, Boolean> entry : playersState.entrySet()) {
-                    String key = entry.getKey();
-                    Boolean value = entry.getValue();
-                    System.out.println("Player: " + key + ", Invisible: " + value);
-                }
             }
         });
     }
