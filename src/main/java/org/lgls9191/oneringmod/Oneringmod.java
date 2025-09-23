@@ -12,7 +12,6 @@ import org.lgls9191.oneringmod.networking.PlayerStateTrackerServer;
 import org.lgls9191.oneringmod.networking.UseRingS2CPayload;
 import org.lgls9191.oneringmod.payload.PlayerUtils;
 import org.lgls9191.oneringmod.sounds.ModSounds;
-import org.lgls9191.oneringmod.sounds.SoundClipPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,9 +51,7 @@ public class Oneringmod implements ModInitializer {
         UseRingS2CPayload payload = new UseRingS2CPayload(uuid, false);
 
         if (server != null) {
-            PlayerLookup.all(server).forEach(player -> {
-                ServerPlayNetworking.send(player, payload);
-            });
+            PlayerLookup.all(server).forEach(player -> ServerPlayNetworking.send(player, payload));
         }
     }
 }
