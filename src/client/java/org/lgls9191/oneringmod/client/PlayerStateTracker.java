@@ -2,14 +2,18 @@ package org.lgls9191.oneringmod.client;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.world.ClientWorld;
 import org.lgls9191.oneringmod.networking.UseRingS2CPayload;
+import org.lgls9191.oneringmod.sounds.ModSounds;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerStateTracker {
     public static final Map<String, Boolean> playersState = new HashMap<>();
+    public static SoundInstance soundInstance;
 
     public static void initialize() {
         // Networking (handle packets sent from the server)
@@ -24,8 +28,14 @@ public class PlayerStateTracker {
             if (mc.player != null) {
                 if (payload.playerUUID().equals(mc.player.getUuidAsString())) {
                     // The player who used the ring receives the packet
-//                    mc.world.playSound();
-//                    System.out.println("I, " + mc.player.ge);
+                    MinecraftClient client = MinecraftClient.getInstance();
+
+                    if (payload.active()) {
+                        soundInstance = PositionedSoundInstance.master(ModSounds.WINDY_FIRE, 1.0F);
+                        client.getSoundManager().play(soundInstance);
+                    } else {
+                        client.getSoundManager().stop(soundInstance);
+                    }
                 } else {
                     // The others players receive the packet
                 }
