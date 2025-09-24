@@ -1,7 +1,5 @@
 package org.lgls9191.oneringmod.mixin;
 
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,8 +8,6 @@ import net.minecraft.server.MinecraftServer;
 import org.lgls9191.oneringmod.Oneringmod;
 import org.lgls9191.oneringmod.items.ModItems;
 import org.lgls9191.oneringmod.items.OneRingItem;
-import org.lgls9191.oneringmod.networking.PlayerStateTrackerServer;
-import org.lgls9191.oneringmod.networking.UseRingS2CPayload;
 import org.lgls9191.oneringmod.payload.PlayerUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,19 +34,6 @@ public class LivingEntityMixin {
                 PlayerUtils.deacAllPlayerRings(pe.getInventory());
 
                 Oneringmod.deacRingPlayer(server, uuid);
-//
-//                // Update server-side player tracker
-//                PlayerStateTrackerServer.updatePlayerState(uuid, false);
-//
-//                // Send packet to server
-//                UseRingS2CPayload payload = new UseRingS2CPayload(uuid, false);
-//
-//                if (server != null) {
-//                    PlayerLookup.all(server).forEach(player -> {
-//                        System.out.println(uuid + " -> ");
-//                        ServerPlayNetworking.send(player, payload);
-//                    });
-//                }
             }
         }
     }

@@ -1,7 +1,6 @@
 package org.lgls9191.oneringmod.mixin.client;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -31,7 +30,7 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extend
         if (lentity instanceof PlayerEntityRenderer) {
             MinecraftClient client = MinecraftClient.getInstance();
 
-            if (client.world != null) {
+            if (client.world != null && client.player != null) {
                 var players = client.world.getPlayers();
 
                 for (var player : players) {
