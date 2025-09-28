@@ -1,4 +1,9 @@
 # Minecraft One Ring Mod
+
+Overworld             |  Wraith world
+:-------------------------:|:-------------------------:
+![overworld.png](screenshots/overworld.png)  |  ![wraithworld.png](screenshots/wraithworld.png)
+
 This mod adds one special item: The One Ring from the Lord Of The Rings. <br>
 Right-click the ring to get transported into the wraith world and become invisible to others! <br>
 The mod works in solo and in multiplayer and is compatible with shaders.
