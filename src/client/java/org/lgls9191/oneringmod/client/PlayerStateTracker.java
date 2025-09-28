@@ -5,6 +5,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import org.lgls9191.oneringmod.networking.UseRingS2CPayload;
 import org.lgls9191.oneringmod.sounds.ModSounds;
 
@@ -31,10 +33,20 @@ public class PlayerStateTracker {
                     MinecraftClient client = MinecraftClient.getInstance();
 
                     if (payload.active()) {
+                        // Set ambien noise
                         soundInstance = PositionedSoundInstance.master(ModSounds.WINDY_FIRE, 1.0F);
                         client.getSoundManager().play(soundInstance);
+
+                        // Set darkness status
+                        StatusEffectInstance darknessEffect = new StatusEffectInstance(StatusEffects.DARKNESS, Integer.MAX_VALUE, 0, false, false);
+
+                        if (client.player != null)
+                            client.player.setStatusEffect(darknessEffect, null);
                     } else {
+                        // Remove sound and visual effect
                         client.getSoundManager().stop(soundInstance);
+                        if (client.player != null)
+                            client.player.removeStatusEffect(StatusEffects.DARKNESS);
                     }
                 } else {
                     // The others players receive the packet
