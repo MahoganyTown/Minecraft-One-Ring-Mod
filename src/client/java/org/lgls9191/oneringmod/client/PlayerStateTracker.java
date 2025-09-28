@@ -39,14 +39,19 @@ public class PlayerStateTracker {
 
                         // Set darkness status
                         StatusEffectInstance darknessEffect = new StatusEffectInstance(StatusEffects.DARKNESS, Integer.MAX_VALUE, 0, false, false);
+                        StatusEffectInstance nauseaEffect = new StatusEffectInstance(StatusEffects.NAUSEA, Integer.MAX_VALUE, 0, false, false);
 
-                        if (client.player != null)
+                        if (client.player != null) {
                             client.player.setStatusEffect(darknessEffect, null);
+                            client.player.setStatusEffect(nauseaEffect, null);
+                        }
                     } else {
                         // Remove sound and visual effect
                         client.getSoundManager().stop(soundInstance);
-                        if (client.player != null)
+                        if (client.player != null) {
                             client.player.removeStatusEffect(StatusEffects.DARKNESS);
+                            client.player.removeStatusEffect(StatusEffects.NAUSEA);
+                        }
                     }
                 } else {
                     // The others players receive the packet
